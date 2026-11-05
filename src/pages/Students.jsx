@@ -1,0 +1,5 @@
+import { Users, ShieldCheck } from "lucide-react";
+
+export default function Students({ profiles }) {
+  return <div className="page-stack"><div className="page-title-row"><div><span className="eyebrow">PEOPLE DIRECTORY</span><h1>Library members</h1><p className="muted">Registered accounts visible to library administrators.</p></div><span className="count-pill">{profiles.length} members</span></div><div className="table-panel"><div className="table-scroll"><table><thead><tr><th>MEMBER</th><th>EMAIL</th><th>ROLE</th><th>JOINED</th></tr></thead><tbody>{profiles.map(p=><tr key={p.id}><td><div className="table-book"><span className="avatar small-avatar">{p.full_name?.[0]?.toUpperCase()}</span><strong>{p.full_name}</strong></div></td><td>{p.email}</td><td><span className={`status ${p.role==="admin"?"status-blue":"status-green"}`}>{p.role==="admin"?<ShieldCheck size={13}/>:<Users size={13}/>} {p.role}</span></td><td>{new Date(p.created_at).toLocaleDateString()}</td></tr>)}</tbody></table></div>{!profiles.length&&<div className="empty-state"><Users/><strong>No members found</strong></div>}</div></div>;
+}
