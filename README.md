@@ -1,39 +1,29 @@
-# LibraryHub — Online Library Management System
+# LibraryHub – Online Library Management System (LocalStorage edition)
 
-A React + Vite + Supabase starter application with student/admin experiences, book catalog, borrowing, reservations, admin returns, notifications, and live inventory subscriptions.
+A React + Vite library management project. It uses browser LocalStorage instead of Supabase, so no database account, API keys, SQL setup, or backend server is required.
 
 ## Requirements
-- Node.js LTS
-- A Supabase project
+- Node.js 20 or newer
 - VS Code (recommended)
 
-## Run locally
-1. Extract this project and open the folder in VS Code.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env.local`.
-4. Add your Supabase Project URL and publishable key.
-5. Run the SQL in `supabase/schema.sql` in Supabase SQL Editor.
-6. Run `npm run dev` and open the localhost URL shown in the terminal.
+## Run on Windows
+Open this folder in VS Code, open Terminal > New Terminal, then run:
 
-## Create the first admin
-1. Register through the app as a normal student.
-2. In Supabase Dashboard → Authentication → Users, copy that user's UUID.
-3. Run this SQL, replacing the placeholder:
-   `update public.profiles set role = 'admin' where id = 'YOUR-USER-UUID';`
-4. Sign out and sign in again. The app reads the role from `profiles`.
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
 
-Never make the service-role key available to the browser. Public signup always creates a student. Admin role assignment must be performed by a trusted administrator.
+Open the local URL printed by Vite (usually http://localhost:5173).
 
-## Deploy to Vercel
-1. Push this folder to a GitHub repository.
-2. Import the repository in Vercel.
-3. Framework: Vite; Build command: `npm run build`; Output directory: `dist`.
-4. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` as Vercel environment variables.
-5. Add the deployed Vercel URL to Supabase Authentication → URL Configuration → Redirect URLs.
+## Demo administrator login
+- Email: `admin@libraryhub.local`
+- Password: `Admin@123`
 
-## Important implementation notes
-- Borrowing and admin return use transactional PostgreSQL RPC functions.
-- RLS restricts student records to their owner; admin access is role-checked in the database.
-- Reservation creation is implemented, but automatic queue fulfillment is not included in this MVP.
-- Overdue status/email scheduling, fines, CSV reports, and student suspension are future modules.
-- Test all policies and workflows with separate student and admin accounts before real use.
+Students can create accounts using **Create an account**. New registrations always receive the Student role. Do not use real passwords in this demo project.
+
+## Data storage
+Books, student accounts, borrowings, reservations, and notifications are stored in the browser's LocalStorage. Data remains after refresh in the same browser profile, but does not sync between devices or browsers. Clearing browser site data removes this information. This is a learning/demo implementation, not secure production authentication or multi-user online storage.
+
+## Deploy
+Push the project to GitHub and import the repository into Vercel. The Vite build command is `npm run build`, and the output folder is `dist`.

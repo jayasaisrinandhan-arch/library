@@ -30,7 +30,7 @@ export default function Auth({ onLogin, onRegister, busy }) {
       <form className="auth-card" onSubmit={submit}>
         <span className="eyebrow">{mode === "login" ? "WELCOME BACK" : "GET STARTED"}</span>
         <h2>{mode === "login" ? "Sign in to your library" : "Create your account"}</h2>
-        <p className="muted">{mode === "login" ? "Enter your details to continue." : "Student accounts are created with student access."}</p>
+        <p className="muted">{mode === "login" ? "Enter your details to continue." : "Student accounts are created with student access."}</p>{mode === "login" && <div className="notice">Demo admin: admin@libraryhub.local / Admin@123</div>}
         {mode === "register" && <label>Full name<input value={name} onChange={e=>setName(e.target.value)} required placeholder="Your full name"/></label>}
         <label>Email address<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required placeholder="you@example.com"/></label>
         <label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} required minLength={6} placeholder="At least 6 characters"/></label>
